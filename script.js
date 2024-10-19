@@ -13,13 +13,14 @@ const risultato = document.querySelector("#risultato");
 const resetBtn = document.querySelector("#resetBtn");
 
 function start() {
-    choseBtn.forEach(choseBtn => {
-        choseBtn.classList.add("playing");
+    document.querySelector('.playing-choices').classList.add('playing');
+    choseBtn.forEach(btn => {
+        btn.classList.remove("notPlaying");
+        btn.classList.add("playing");
     });
     informazioni.classList.remove("notPlaying");
-    informazioni.classList.add("Playing");
+    informazioni.classList.add("playing");
     playBtn.classList.add("notPlaying");
-
 };
 
 let sceltaUtente;
@@ -41,13 +42,15 @@ function sceltaForbici() {
 
 function scelta() {
     alert(`${nomeGiocatore} hai scelto ${sceltaUtente}`);
-    choseBtn.forEach(choseBtn => {
-        choseBtn.classList.remove("playing");
-    })
+    document.querySelector('.playing-choices').classList.remove('playing');
+    choseBtn.forEach(btn => {
+        btn.classList.add("notPlaying");
+        btn.classList.remove("playing");
+    });
     informazioni.classList.add("notPlaying");
     informazioni.classList.remove("playing");
     resultBtn.classList.add("playing");
-    pcMove()
+    pcMove();
 }
 
 let mossaComputer
@@ -71,39 +74,57 @@ function risultatoHTML() {
     risultato.classList.add("playing");
 }
 
+function getIcon(scelta) {
+    switch(scelta) {
+        case 'sasso': return '🪨';
+        case 'carta': return '📄';
+        case 'forbici': return '✂️';
+        default: return '';
+    }
+}
 
 function verdetto() {
     let vittorie = localStorage.getItem('vittorie') || 0;
     let pareggi = localStorage.getItem('pareggi') || 0;
     let sconfitte = localStorage.getItem('sconfitte') || 0;
 
+    let userIcon = getIcon(sceltaUtente);
+    let pcIcon = getIcon(mossaComputer);
+
+    risultatoHTML();
+
     if (mossaComputer === sceltaUtente) {
-        risultatoHTML();
-        risultato.innerHTML = `${nomeGiocatore} a quanto pare hai PAREGGIATO!`;
+        risultato.innerHTML = `
+            <p>${nomeGiocatore}, è un pareggio!</p>
+            <p>${sceltaUtente.toUpperCase()} ${userIcon} pareggia con ${mossaComputer.toUpperCase()} ${pcIcon}</p>
+        `;
         pareggi++;
         localStorage.setItem('pareggi', pareggi);
     }
     else if ((mossaComputer === 'sasso' && sceltaUtente === 'carta') ||
         (mossaComputer === 'carta' && sceltaUtente === 'forbici') ||
         (mossaComputer === 'forbici' && sceltaUtente === 'sasso')) {
-        risultatoHTML();
-        risultato.innerHTML = `${nomeGiocatore} hai Vinto, il PC ha scelto ${mossaComputer}`;
+        risultato.innerHTML = `
+            <p>${nomeGiocatore}, hai vinto! 🎉</p>
+            <p>${sceltaUtente.toUpperCase()} ${userIcon} batte ${mossaComputer.toUpperCase()} ${pcIcon}</p>
+        `;
         vittorie++;
         localStorage.setItem('vittorie', vittorie);
-    } else if ((mossaComputer === 'sasso' && sceltaUtente === 'forbici') ||
-        (mossaComputer === 'carta' && sceltaUtente === 'sasso') ||
-        (mossaComputer === 'forbici' && sceltaUtente === 'carta')) {
-        risultatoHTML();
-        risultato.innerHTML = `${nomeGiocatore} hai Perso, il PC ha scelto ${mossaComputer}`;
+    } else {
+        risultato.innerHTML = `
+            <p>${nomeGiocatore}, hai perso! 😢</p>
+            <p>${mossaComputer.toUpperCase()} ${pcIcon} batte ${sceltaUtente.toUpperCase()} ${userIcon}</p>
+        `;
         sconfitte++;
         localStorage.setItem('sconfitte', sconfitte);
-    };
+    }
 }
 
 function resetGame() {
     sceltaUtente = null;
     mossaComputer = null;
     risultato.innerHTML = '';
+    risultato.classList.remove("playing");
     risultato.classList.add("notPlaying");
     resultBtn.classList.remove("playing");
     resetBtn.classList.remove("playing");

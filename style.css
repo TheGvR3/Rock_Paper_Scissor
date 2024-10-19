@@ -7,65 +7,145 @@
 }
 
 body {
-    background-color: gray;
+    background-color: #f0f0f0;
     text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }
 
 button {
     border-radius: 5px;
-    cursor: pointer;}
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
 
 .container,
 #chose-box,
 #result-box {
-    width: 80%;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#chose-box {
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.playing-choices {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
 
-#sasso, #carta, #forbice, #verdetto, #resetBtn {
-    width: 40%;
+.playing-choices.playing {
+    display: flex;
+}
+
+#sasso, #carta, #forbice {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+#sasso { background-color: #8B4513; } /* Marrone per la pietra */
+#carta { background-color: #F0E68C; color: #333; } /* Giallo chiaro per la carta */
+#forbice { background-color: #C0C0C0; } /* Argento per le forbici */
+
+.choice-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+#verdetto, #resetBtn, #playBtn {
+    width: 200px;
+}
+
+#verdetto { background-color: #feca57; }
+#resetBtn { background-color: #ff9ff3; }
+#playBtn { 
+    background-color: #54a0ff;
+    font-size: 24px;
     padding: 20px;
-    margin-top: 0.5rem;
 }
-#sasso p,  #carta p, #forbice p, #verdetto p, #resetBtn p{
-    margin: auto;
-}
-
-#playBtn{
-    text-align: center;
-    width: 40%;
-    padding: 20px;
-}
-
-#chose-box{margin-bottom: 2rem;}
 
 #result-box {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 5rem;
+    gap: 2rem;
 }
 
 #result-box button {
-    padding: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
 }
 
-#result-box button:first-child {
-    background-color: rgb(15, 216, 15);
-}
+#showResultsBtn { background-color: #5f27cd; color: white; }
+#pulisciLocalStorageBtn { background-color: #ff6b6b; color: white; }
 
-#result-box button:last-child {
-    background-color: red;
-}
-
-#titolo, #risultato{
-    font-size: 50px;
-}
-
-#informazioni{
+#titolo, #risultato {
     font-size: 40px;
+    margin-bottom: 20px;
+    color: #2d3436;
+}
+
+#informazioni {
+    font-size: 24px;
+    color: #636e72;
+    margin-bottom: 20px;
+}
+
+#risultato {
+    display: none;  // Nascondi il risultato di default
+    font-size: 28px;
+    margin: 20px auto;  // Centra il div orizzontalmente
+    color: #2d3436;
+    background-color: #f1f2f6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+}
+
+#risultato.playing {
+    display: block;  // Mostra il risultato quando ha la classe 'playing'
+}
+
+#risultato p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+#risultato p:first-child {
+    font-weight: bold;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+#risultato p:last-child {
+    font-size: 24px;
+}
+
+#verdetto {
+    margin: 20px 0;
 }
