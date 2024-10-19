@@ -1,0 +1,71 @@
+.notPlaying {
+    display: none;
+}
+
+.playing {
+    display: flex;
+}
+
+body {
+    background-color: gray;
+    text-align: center;
+}
+
+button {
+    border-radius: 5px;
+    cursor: pointer;}
+
+.container,
+#chose-box,
+#result-box {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#sasso, #carta, #forbice, #verdetto, #resetBtn {
+    width: 40%;
+    padding: 20px;
+    margin-top: 0.5rem;
+}
+#sasso p,  #carta p, #forbice p, #verdetto p, #resetBtn p{
+    margin: auto;
+}
+
+#playBtn{
+    text-align: center;
+    width: 40%;
+    padding: 20px;
+}
+
+#chose-box{margin-bottom: 2rem;}
+
+#result-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+}
+
+#result-box button {
+    padding: 10px;
+}
+
+#result-box button:first-child {
+    background-color: rgb(15, 216, 15);
+}
+
+#result-box button:last-child {
+    background-color: red;
+}
+
+#titolo, #risultato{
+    font-size: 50px;
+}
+
+#informazioni{
+    font-size: 40px;
+}
