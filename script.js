@@ -1,8 +1,8 @@
-alert("Benvenuto Sfidante")
+alert("Welcome Challenger")
 
-const nomeGiocatore = window.prompt("Inserisci il tuo nome");
+const nomeGiocatore = window.prompt("Enter your name");
 
-document.querySelector("#titolo").innerHTML = `Benvenuto ${nomeGiocatore}`;
+document.querySelector("#titolo").innerHTML = `Welcome ${nomeGiocatore}`;
 
 const titolo = document.querySelector("#titolo");
 const informazioni = document.querySelector("#informazioni");
@@ -41,7 +41,7 @@ function sceltaForbici() {
 }
 
 function scelta() {
-    alert(`${nomeGiocatore} hai scelto ${sceltaUtente}`);
+    alert(`${nomeGiocatore} you chose ${sceltaUtente}`);
     document.querySelector('.playing-choices').classList.remove('playing');
     choseBtn.forEach(btn => {
         btn.classList.add("notPlaying");
@@ -84,9 +84,9 @@ function getIcon(scelta) {
 }
 
 function verdetto() {
-    let vittorie = localStorage.getItem('vittorie') || 0;
-    let pareggi = localStorage.getItem('pareggi') || 0;
-    let sconfitte = localStorage.getItem('sconfitte') || 0;
+    let vittorie = localStorage.getItem('wins') || 0;
+    let pareggi = localStorage.getItem('draws') || 0;
+    let sconfitte = localStorage.getItem('losses') || 0;
 
     let userIcon = getIcon(sceltaUtente);
     let pcIcon = getIcon(mossaComputer);
@@ -95,28 +95,28 @@ function verdetto() {
 
     if (mossaComputer === sceltaUtente) {
         risultato.innerHTML = `
-            <p>${nomeGiocatore}, è un pareggio!</p>
-            <p>${sceltaUtente.toUpperCase()} ${userIcon} pareggia con ${mossaComputer.toUpperCase()} ${pcIcon}</p>
+            <p>${nomeGiocatore}, it's a draw!</p>
+            <p>${sceltaUtente.toUpperCase()} ${userIcon} draws with ${mossaComputer.toUpperCase()} ${pcIcon}</p>
         `;
         pareggi++;
-        localStorage.setItem('pareggi', pareggi);
+        localStorage.setItem('draws', pareggi);
     }
     else if ((mossaComputer === 'sasso' && sceltaUtente === 'carta') ||
         (mossaComputer === 'carta' && sceltaUtente === 'forbici') ||
         (mossaComputer === 'forbici' && sceltaUtente === 'sasso')) {
         risultato.innerHTML = `
-            <p>${nomeGiocatore}, hai vinto! 🎉</p>
-            <p>${sceltaUtente.toUpperCase()} ${userIcon} batte ${mossaComputer.toUpperCase()} ${pcIcon}</p>
+            <p>${nomeGiocatore}, you won! 🎉</p>
+            <p>${sceltaUtente.toUpperCase()} ${userIcon} beats ${mossaComputer.toUpperCase()} ${pcIcon}</p>
         `;
         vittorie++;
-        localStorage.setItem('vittorie', vittorie);
+        localStorage.setItem('wins', vittorie);
     } else {
         risultato.innerHTML = `
-            <p>${nomeGiocatore}, hai perso! 😢</p>
-            <p>${mossaComputer.toUpperCase()} ${pcIcon} batte ${sceltaUtente.toUpperCase()} ${userIcon}</p>
+            <p>${nomeGiocatore}, you lost! 😢</p>
+            <p>${mossaComputer.toUpperCase()} ${pcIcon} beats ${sceltaUtente.toUpperCase()} ${userIcon}</p>
         `;
         sconfitte++;
-        localStorage.setItem('sconfitte', sconfitte);
+        localStorage.setItem('losses', sconfitte);
     }
 }
 
@@ -133,11 +133,11 @@ function resetGame() {
 }
 
 function mostraRisultati() {
-    let vittorie = localStorage.getItem('vittorie') || 0;
-    let pareggi = localStorage.getItem('pareggi') || 0;
-    let sconfitte = localStorage.getItem('sconfitte') || 0;
+    let vittorie = localStorage.getItem('wins') || 0;
+    let pareggi = localStorage.getItem('draws') || 0;
+    let sconfitte = localStorage.getItem('losses') || 0;
 
-    alert(`Risultati:\nVittorie: ${vittorie}\nPareggi: ${pareggi}\nSconfitte: ${sconfitte}`);
+    alert(`Results:\nWins: ${vittorie}\nDraws: ${pareggi}\nLosses: ${sconfitte}`);
 }
 
 function pulisciLocalStorage() {

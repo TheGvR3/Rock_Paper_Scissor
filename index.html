@@ -10,39 +10,39 @@
 
 <body>
     <div class="container">
-        <h1 id="titolo" class="">Benvenuto</h1>
+        <h1 id="titolo" class="">Welcome</h1>
         
 
 
         <div id="chose-box">
             <button id="playBtn" class="" onclick="start()">PLAY</button>
-            <h2 id="informazioni" class="notPlaying">Fai la tua scelta</h2>
+            <h2 id="informazioni" class="notPlaying">Make your choice</h2>
             <div class="playing-choices">
                 <button id="sasso" class="choseBtn notPlaying" onclick="sceltaSasso()">
                     <span class="choice-icon">🪨</span>
-                    <p>SASSO</p>
+                    <p>ROCK</p>
                 </button>
                 <button id="carta" class="choseBtn notPlaying" onclick="sceltaCarta()">
                     <span class="choice-icon">📄</span>
-                    <p>CARTA</p>
+                    <p>PAPER</p>
                 </button>
                 <button id="forbice" class="choseBtn notPlaying" onclick="sceltaForbici()">
                     <span class="choice-icon">✂️</span>
-                    <p>FORBICE</p>
+                    <p>SCISSORS</p>
                 </button>
             </div>
             <h2 id="calcolo" class="notPlaying"> </h2>
-            <button id="verdetto" class="notPlaying" onclick="verdetto()"><p>VERDETTO</p></button>
+            <button id="verdetto" class="notPlaying" onclick="verdetto()"><p>VERDICT</p></button>
 
             <h1 id="risultato"> </h1>
 
-            <button id="resetBtn" class="notPlaying" onclick="resetGame()"><p>RICOMINCIA</p></button>
+            <button id="resetBtn" class="notPlaying" onclick="resetGame()"><p>RESTART</p></button>
         </div>
 
        
         <div id="result-box">
-            <button id="showResultsBtn" class="" onclick="mostraRisultati()">MOSTRA RISULTATI</button>
-            <button id="pulisciLocalStorageBtn" onclick="pulisciLocalStorage()">RESET RISULTATI</button>
+            <button id="showResultsBtn" class="" onclick="mostraRisultati()">SHOW RESULTS</button>
+            <button id="pulisciLocalStorageBtn" onclick="pulisciLocalStorage()">RESET RESULTS</button>
         </div>
     </div>
 
